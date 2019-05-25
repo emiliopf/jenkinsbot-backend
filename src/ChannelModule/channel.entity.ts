@@ -6,12 +6,15 @@ export class Channel {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 500 })
-  name: string;
+  @Column({ length: 150, unique: true })
+  uuid: string;
 
   @Column('text')
   description: string;
 
+  @Column({ length: 100})
+  createdBy: string;
+
   @Column()
-  active: boolean;
+  isActive: boolean = true;
 }
