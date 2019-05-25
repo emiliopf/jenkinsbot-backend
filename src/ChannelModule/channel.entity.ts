@@ -7,7 +7,7 @@ export class Channel {
   id: number;
 
   @Column({ length: 150, unique: true })
-  uuid: string;
+  name: string;
 
   @Column('text')
   description: string;

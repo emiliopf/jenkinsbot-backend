@@ -17,7 +17,7 @@ export class ChannelService {
 
   async create(channelData): Promise<Channel> {
     const channel = new Channel();
-    channel.uuid = channelData.uuid;
+    channel.name = channelData.name;
     channel.description = channelData.description;
     channel.createdBy = channelData.createdBy;
 
@@ -26,8 +26,8 @@ export class ChannelService {
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') {
         throw new HttpException({
-          message: `Channel with ${channel.uuid} already exists`,
-          code: 'CREATE_CHANNEL_UUID_DUPLICATE'},
+          message: `Channel with name ${channel.name} already exists`,
+          code: 'CREATE_CHANNEL_NAME_DUPLICATE'},
           HttpStatus.BAD_REQUEST,
         );
       } else {

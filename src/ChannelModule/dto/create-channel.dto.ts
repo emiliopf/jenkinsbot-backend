@@ -2,7 +2,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateChannelDto {
     @IsNotEmpty()
-    readonly uuid: string;
+    readonly name: string;
 
     readonly description: string;
 
