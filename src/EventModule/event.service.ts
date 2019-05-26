@@ -72,6 +72,27 @@ export class EventService {
     return this.eventRepository.save(event);
   }
 
+  async removeChat(idEvent: string, data): Promise<Event> {
+    const event = await this.eventRepository.findOne(idEvent, { relations: ['chats'] });
+
+    if (!event) {
+      throw new HttpException({
+        message: `Event with id "${idEvent}" not found`,
+        code: 'ADDCHAT_EVENT_NOT_FOUND',
+      },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const { chats } = event;
+
+    event.chats = chats.filter((chat) => {
+      return chat.id !== data.idChat;
+    });
+
+    return this.eventRepository.save(event);
+  }
+
   async createChat(data): Promise<Chat> {
     const chat = new Chat();
     chat.uuid = data.uuid;

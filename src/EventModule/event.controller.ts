@@ -25,6 +25,10 @@ export class EventController {
     return await this.eventService.addChat(idEvent, data);
   }
 
+  @Post('event/:idEvent/remove-chat')
+  async removeChat(@Param('idEvent') idEvent: string, @Body() data: AddChatDto): Promise<Event> {
+    return await this.eventService.removeChat(idEvent, data);
+  }
   @Post('chat/new')
   async createChat(@Body() data: CreateChatDto): Promise<Chat> {
     return await this.eventService.createChat(data);
