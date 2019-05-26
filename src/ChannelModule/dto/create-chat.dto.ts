@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateChannelDto {
+export class CreateChatDto {
     @IsNotEmpty()
-    readonly name: string;
+    readonly uuid: string;
 
     @IsString()
     readonly description: string;

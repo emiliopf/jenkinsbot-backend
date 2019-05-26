@@ -1,5 +1,5 @@
-
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Chat } from './chat.entity';
 
 @Entity()
 export class Channel {
@@ -9,7 +9,7 @@ export class Channel {
   @Column({ length: 150, unique: true })
   name: string;
 
-  @Column('text')
+  @Column('text', { nullable: true })
   description: string;
 
   @Column({ length: 100})
@@ -17,4 +17,7 @@ export class Channel {
 
   @Column()
   isActive: boolean = true;
+
+  @OneToMany(type => Chat, chat => chat.channel)
+  chats: Chat[];
 }
