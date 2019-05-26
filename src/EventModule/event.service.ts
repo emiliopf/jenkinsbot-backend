@@ -29,7 +29,7 @@ export class EventService {
       if (error.code === 'ER_DUP_ENTRY') {
         throw new HttpException({
           message: `Event with code "${event.code}" already exists`,
-          code: 'CREATE_EVENT_NAME_DUPLICATE'
+          code: 'CREATE_EVENT_NAME_DUPLICATE',
         },
           HttpStatus.BAD_REQUEST,
         );
@@ -42,7 +42,7 @@ export class EventService {
 
   async addChat(idEvent: string, data): Promise<Event> {
     const event = await this.eventRepository.findOne(idEvent, { relations: ['chats'] });
-    console.log(event);
+
     if (!event) {
       throw new HttpException({
         message: `Event with id "${idEvent}" not found`,
@@ -83,7 +83,7 @@ export class EventService {
       if (!event) {
         throw new HttpException({
           message: `Event with code "${data.event}" not found`,
-          code: 'CREATE_CHAT_EVENT_NOT_FOUND'
+          code: 'CREATE_CHAT_EVENT_NOT_FOUND',
         },
           HttpStatus.BAD_REQUEST,
         );
@@ -97,7 +97,7 @@ export class EventService {
       if (error.code === 'ER_DUP_ENTRY') {
         throw new HttpException({
           message: `Chat with uuid "${chat.uuid}" already exists`,
-          code: 'CREATE_CHAT_UUID_DUPLICATE'
+          code: 'CREATE_CHAT_UUID_DUPLICATE',
         },
           HttpStatus.BAD_REQUEST,
         );
@@ -105,5 +105,12 @@ export class EventService {
         throw new HttpException({ message: `Internal server error` }, HttpStatus.INTERNAL_SERVER_ERROR);
       }
     }
+  }
+
+  async findChatsByEvent(idEvent: string): Promise<Chat[]> {
+    return await this.chatRepository.createQueryBuilder('chat')
+      .innerJoin('chat.events', 'event')
+      .where('event.id = :idEvent', { idEvent })
+      .getMany();
   }
 }

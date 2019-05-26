@@ -29,4 +29,9 @@ export class EventController {
   async createChat(@Body() data: CreateChatDto): Promise<Chat> {
     return await this.eventService.createChat(data);
   }
+
+  @Get('event/:idEvent/chats')
+  async findChatsByEvent(@Param('idEvent') idEvent: string): Promise<Chat[]> {
+    return await this.eventService.findChatsByEvent(idEvent);
+  }
 }
