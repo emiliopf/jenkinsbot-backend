@@ -12,7 +12,10 @@
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
-            ]
+            ],
+            "env": {
+                "NODE_ENV": "local"
+            }
         }
     ]
 }
