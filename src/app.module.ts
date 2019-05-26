@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ChannelModule } from './ChannelModule/channel.module';
+import { EventModule } from './EventModule/event.module';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { ChannelModule } from './ChannelModule/channel.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    ChannelModule,
+    EventModule,
   ],
 })
 export class AppModule {}

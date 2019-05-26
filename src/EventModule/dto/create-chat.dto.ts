@@ -7,8 +7,5 @@ export class CreateChatDto {
     @IsString()
     readonly description: string;
 
-    @IsNotEmpty()
-    readonly createdBy: string;
-
-    readonly isActive: boolean;
+    readonly event: string;
 }
