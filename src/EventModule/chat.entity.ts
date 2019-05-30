@@ -15,6 +15,9 @@ export class Chat {
   @Column()
   isActive: boolean = true;
 
+  @Column()
+  isGroup: boolean = true;
+
   @ManyToMany(type => Event, event => event.chats)
   events: Event[];
 }
