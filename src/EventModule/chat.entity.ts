@@ -18,6 +18,9 @@ export class Chat {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: string;
 
+  @Column()
+  isGroup: boolean = true;
+
   @ManyToMany(type => Event, event => event.chats)
   events: Event[];
 }
