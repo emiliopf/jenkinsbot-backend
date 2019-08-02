@@ -72,7 +72,7 @@ export class EventService {
     return this.eventRepository.save(event);
   }
 
-  async removeChat(idEvent: string, data): Promise<Event> {
+  async removeEventChat(idEvent: string, data): Promise<Event> {
     const event = await this.eventRepository.findOne(idEvent, { relations: ['chats'] });
 
     if (!event) {

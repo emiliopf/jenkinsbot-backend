@@ -15,6 +15,9 @@ export class Event {
   @Column()
   isActive: boolean = true;
 
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: string;
+
   @ManyToMany(type => Chat, chat => chat.events)
   @JoinTable({
     name: 'events_chats',
@@ -29,5 +32,4 @@ export class Event {
   })
   chats: Chat[];
 
-  
 }
